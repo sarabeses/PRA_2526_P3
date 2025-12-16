@@ -40,6 +40,10 @@ public:
         return val;
     }
 
+     V operator[](std::string key) {
+        return search(key);
+    }
+
     friend std::ostream& operator<<(std::ostream& out, const BSTreeDict<V>& dict) {
         out << dict.bst;
         return out;
