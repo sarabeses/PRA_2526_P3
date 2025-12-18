@@ -1,3 +1,4 @@
+
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
@@ -22,7 +23,9 @@ private:
     }
 
 public:
-    HashTable(int size) : n(0), max(size) {
+    HashTable(int size) {
+        this->n=0;
+        this->max=size;
         table = new ListLinked<TableEntry<V>>[max];
     }
 

@@ -1,4 +1,3 @@
-
 #ifndef BSTREE_H
 #define BSTREE_H
 
@@ -113,7 +112,10 @@ private:
     }
 
 public:
-    BSTree() : nelem(0), root(nullptr) {}
+    BSTree() {
+        nelem=0;
+        root=nullptr;
+    }
 
     ~BSTree() {
         delete_cascade(root);
