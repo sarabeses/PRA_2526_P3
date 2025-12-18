@@ -1,31 +1,38 @@
+
 #ifndef TABLEENTRY_H
 #define TABLEENTRY_H
 
 #include <string>
 #include <ostream>
 
-template <typename V> 
+template <typename V>
 class TableEntry {
 public:
-    std::string key;
-    V value;
+    std::string key; 
+    V value;    
 
-    TableEntry(std::string k, V v) : key(k), value(v) {}
-    TableEntry(std::string k) : key(k), value(V{}) {}
-    TableEntry() : key(""), value(V{}) {}
+    TableEntry() = default;
 
-    friend bool operator == (const TableEntry<V>& te1, const TableEntry<V>& te2) {
+    TableEntry(const std::string& k, const V& v) : key(k), value(v) {}
+
+    explicit TableEntry(const std::string& k) : key(k), value(V{}) {}
+
+    friend bool operator<(const TableEntry<V>& te1, const TableEntry<V>& te2) {
+        return te1.key < te2.key;
+    }
+
+    friend bool operator>(const TableEntry<V>& te1, const TableEntry<V>& te2) {
+        return te1.key > te2.key; 
+    }
+
+    friend bool operator==(const TableEntry<V>& te1, const TableEntry<V>& te2) {
         return te1.key == te2.key;
     }
 
-    friend bool operator!=(const TableEntry<V>& te1, const TableEntry<V>& te2) {
-        return te1.key != te2.key;
-    }
-
     friend std::ostream& operator<<(std::ostream& out, const TableEntry<V>& te) {
-        out << "[" << te.key << " -> " << te.value << "]";
+        out << te.key;
         return out;
     }
 };
 
-#endif
+#endif 
